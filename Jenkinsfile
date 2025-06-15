@@ -1,12 +1,7 @@
 pipeline {
-  agent { 
-     node {
-            label 'docker-agent-docker'
-           }
-  }
+  agent  none
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-    DOCKER_TLS_CERTDIR = ''
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub_id')
   }
   stages {
     stage('Build') {
