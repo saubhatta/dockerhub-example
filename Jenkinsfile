@@ -1,10 +1,9 @@
 pipeline {
-  agent {
-      docker {
-            image 'docker:26.0.0-dind'
-            args '--privileged -v /var/lib/docker' // Required for DinD
-        }
-    }
+  agent { 
+     node {
+            label 'docker-agent-docker'
+           }
+  }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     DOCKER_TLS_CERTDIR = ''
