@@ -1,10 +1,13 @@
 pipeline {
-  agent { label 'docker-agent-docker' }
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
+  agent {
+      docker {
+            image 'docker:26.0.0-dind'
+            args '--privileged -v /var/lib/docker' // Required for DinD
+        }
+    }
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    DOCKER_TLS_CERTDIR = ''
   }
   stages {
     stage('Build') {
